@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q360 | Mantenimiento Industrial Inteligente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   Q360 DESIGN SYSTEM
+   Paleta: Manual de Identidad v2.2
+   ═══════════════════════════════════════ */
+:root {
+  --purplish-blue: #4814DA;
+  --liberty: #11152F;
+  --white-smoke: #F5F5F5;
+  --electric-lemonade: #5FDAF4;
+  --fuchsia: #D946EF;
+  --indigo: #6366F1;
+  --graphite: #374151;
+  --steel: #6B7280;
+  --chrome: #D1D5DB;
+  --matrix-green: #22C55E;
+  --system-red: #EF4444;
+  --amber: #F59E0B;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--liberty);
+  background: #fff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ UTILITIES ═══ */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--purplish-blue);
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(72, 20, 218, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(72, 20, 218, 0.3); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes orbMove1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(50px, -30px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+@keyframes orbMove2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-40px, 40px) scale(0.9); }
+  66% { transform: translate(30px, -20px) scale(1.05); }
+}
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══ NAVBAR ═══ */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: all 0.4s ease;
+  background: rgba(255,255,255,0.0);
+}
+nav.scrolled {
+  background: rgba(17, 21, 47, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 0.7rem 0;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+}
+nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+.nav-logo-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--purplish-blue);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  font-size: 1rem;
+}
+.nav-logo-text {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+nav.scrolled .nav-logo-text { color: #fff; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--electric-lemonade); }
+.nav-cta {
+  background: var(--purplish-blue) !important;
+  color: #fff !important;
+  padding: 0.55rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 500 !important;
+  transition: all 0.3s !important;
+}
+.nav-cta:hover { background: #5a2de8 !important; transform: translateY(-1px); }
+
+/* ═══ HERO ═══ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--liberty);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(72, 20, 218, 0.25) 0%, transparent 70%);
+  animation: orbMove1 20s ease-in-out infinite;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(95, 218, 244, 0.12) 0%, transparent 70%);
+  animation: orbMove2 25s ease-in-out infinite;
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(72, 20, 218, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(72, 20, 218, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 100%);
+}
+.hero .container { position: relative; z-index: 2; }
+.hero-content { max-width: 750px; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(72, 20, 218, 0.15);
+  border: 1px solid rgba(72, 20, 218, 0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--matrix-green);
+  border-radius: 50%;
+  animation: pulseGlow 2s infinite;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+.hero-badge span {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  color: var(--electric-lemonade);
+  letter-spacing: 0.05em;
+}
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.8s ease 0.15s both;
+}
+.hero h1 .accent {
+  background: linear-gradient(135deg, var(--electric-lemonade), var(--purplish-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.6;
+  max-width: 580px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+  animation: fadeUp 0.8s ease 0.45s both;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--purplish-blue);
+  color: #fff;
+  padding: 0.9rem 2rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: #5a2de8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(72, 20, 218, 0.4);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: rgba(255,255,255,0.8);
+  padding: 0.9rem 2rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s;
+}
+.btn-secondary:hover {
+  border-color: var(--electric-lemonade);
+  color: var(--electric-lemonade);
+}
+
+/* Hero Metrics */
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 14px;
+  overflow: hidden;
+  animation: fadeUp 0.8s ease 0.6s both;
+}
+.hero-metric {
+  padding: 1.5rem;
+  background: rgba(17, 21, 47, 0.7);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  transition: background 0.3s;
+}
+.hero-metric:hover { background: rgba(72, 20, 218, 0.1); }
+.hero-metric-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--electric-lemonade);
+  margin-bottom: 0.3rem;
+}
+.hero-metric-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.03em;
+}
+
+/* ═══ ABOUT STRIP ═══ */
+.about-strip {
+  padding: 6rem 0;
+  background: #fff;
+  position: relative;
+}
+.about-strip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--purplish-blue), var(--electric-lemonade));
+  border-radius: 2px;
+}
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-content h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--liberty);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.about-content p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  color: var(--steel);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--purplish-blue);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  transition: gap 0.3s;
+}
+.about-cta:hover { gap: 0.8rem; }
+.about-cta::after { content: '→'; }
+
+/* ═══ SERVICES ═══ */
+.services {
+  padding: 7rem 0;
+  background: var(--white-smoke);
+  position: relative;
+}
+.services-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 4rem;
+}
+.services-header h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--liberty);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.services-header p {
+  font-family: 'Lato', sans-serif;
+  color: var(--steel);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.service-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--purplish-blue), var(--electric-lemonade));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(17, 21, 47, 0.1);
+  border-color: rgba(72, 20, 218, 0.1);
+}
+.service-card:hover::before { opacity: 1; }
+.service-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, rgba(72, 20, 218, 0.08), rgba(95, 218, 244, 0.08));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.4rem;
+}
+.service-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--liberty);
+  margin-bottom: 0.8rem;
+}
+.service-card p {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.88rem;
+  color: var(--steel);
+  line-height: 1.65;
+  margin-bottom: 1.2rem;
+}
+.service-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--purplish-blue);
+  background: rgba(72, 20, 218, 0.06);
+  padding: 0.3rem 0.8rem;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+}
+.service-tag::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--electric-lemonade);
+  border-radius: 50%;
+}
+
+/* Wide card for preventivo */
+.service-card.wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2.5rem;
+}
+.service-card.wide .service-icon { margin-bottom: 0; }
+.service-card.wide h3 { margin-bottom: 0.3rem; }
+.service-card.wide p { margin-bottom: 0; }
+
+/* ═══ DIFFERENTIATORS ═══ */
+.differentiators {
+  padding: 7rem 0;
+  background: #fff;
+}
+.diff-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 4rem;
+}
+.diff-header h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--liberty);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.diff-card {
+  padding: 2rem;
+  border-radius: 14px;
+  border: 1px solid rgba(17, 21, 47, 0.06);
+  transition: all 0.3s;
+  position: relative;
+}
+.diff-card:hover {
+  border-color: rgba(72, 20, 218, 0.15);
+  background: rgba(72, 20, 218, 0.02);
+}
+.diff-number {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--purplish-blue);
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+.diff-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--liberty);
+  margin-bottom: 0.7rem;
+}
+.diff-card p {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.88rem;
+  color: var(--steel);
+  line-height: 1.65;
+}
+
+/* ═══ SND TECHNOLOGY ═══ */
+.snd {
+  padding: 7rem 0;
+  background: var(--liberty);
+  position: relative;
+  overflow: hidden;
+}
+.snd::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(72, 20, 218, 0.15) 0%, transparent 60%);
+}
+.snd .container { position: relative; z-index: 2; }
+.snd-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.snd-content h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+.snd-content .snd-tagline {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  color: var(--electric-lemonade);
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+  font-style: italic;
+}
+.snd-content p {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.snd-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.snd-stat {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+.snd-stat:hover {
+  background: rgba(72, 20, 218, 0.1);
+  border-color: rgba(72, 20, 218, 0.3);
+}
+.snd-stat-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--electric-lemonade);
+  margin-bottom: 0.3rem;
+}
+.snd-stat-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+}
+.snd-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.snd-node {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  transition: all 0.4s;
+}
+.snd-node:hover {
+  background: rgba(72, 20, 218, 0.08);
+  border-color: rgba(72, 20, 218, 0.2);
+  transform: translateX(8px);
+}
+.snd-node-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.snd-node-icon.monday { background: rgba(255, 52, 120, 0.15); }
+.snd-node-icon.netsuite { background: rgba(255, 160, 0, 0.15); }
+.snd-node-icon.samsara { background: rgba(34, 197, 94, 0.15); }
+.snd-node-icon.datascope { background: rgba(95, 218, 244, 0.15); }
+.snd-node-icon.n8n { background: rgba(209, 70, 239, 0.15); }
+.snd-node-text { flex: 1; }
+.snd-node-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+}
+.snd-node-desc {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.4);
+}
+.snd-node-status {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--matrix-green);
+  background: rgba(34, 197, 94, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
+/* ═══ SOCIAL PROOF ═══ */
+.social-proof {
+  padding: 7rem 0;
+  background: var(--white-smoke);
+}
+.proof-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.proof-content h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--liberty);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.proof-content p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  color: var(--steel);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.proof-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.proof-metric {
+  text-align: center;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.proof-metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--purplish-blue);
+}
+.proof-metric-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  color: var(--steel);
+  margin-top: 0.3rem;
+}
+.proof-visual {
+  position: relative;
+}
+.proof-card {
+  background: var(--liberty);
+  border-radius: 20px;
+  padding: 3rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.proof-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(72, 20, 218, 0.3) 0%, transparent 70%);
+}
+.proof-card-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--electric-lemonade);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.proof-card-quote {
+  font-size: 1.3rem;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.5;
+  position: relative;
+  margin-bottom: 1.5rem;
+  color: rgba(255,255,255,0.9);
+}
+.proof-card-attr {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  position: relative;
+}
+
+/* ═══ VALUE FORMULA ═══ */
+.formula {
+  padding: 5rem 0;
+  background: #fff;
+}
+.formula-box {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 4rem 3rem;
+  background: linear-gradient(135deg, var(--liberty) 0%, #1a1f3d 100%);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.formula-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(72, 20, 218, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(72, 20, 218, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.formula-equation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  flex-wrap: wrap;
+}
+.formula-term {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  color: #fff;
+  padding: 0.8rem 1.8rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+}
+.formula-op {
+  font-size: 1.8rem;
+  color: var(--electric-lemonade);
+  font-weight: 300;
+}
+.formula-result {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  color: var(--liberty);
+  padding: 0.8rem 1.8rem;
+  background: var(--electric-lemonade);
+  border-radius: 12px;
+}
+.formula-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ═══ FAQ ═══ */
+.faq {
+  padding: 7rem 0;
+  background: var(--white-smoke);
+}
+.faq-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.faq-header h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--liberty);
+  letter-spacing: -0.02em;
+}
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.faq-item {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(17, 21, 47, 0.05);
+  transition: border-color 0.3s;
+}
+.faq-item.active { border-color: rgba(72, 20, 218, 0.15); }
+.faq-question {
+  width: 100%;
+  padding: 1.3rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--liberty);
+  text-align: left;
+}
+.faq-question:hover { color: var(--purplish-blue); }
+.faq-chevron {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+  color: var(--steel);
+  flex-shrink: 0;
+}
+.faq-item.active .faq-chevron { transform: rotate(180deg); color: var(--purplish-blue); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-answer-inner {
+  padding: 0 1.5rem 1.3rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  color: var(--steel);
+  line-height: 1.7;
+}
+
+/* ═══ CTA SECTION ═══ */
+.cta-section {
+  padding: 7rem 0;
+  background: #fff;
+}
+.cta-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.cta-text h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--liberty);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.cta-text p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  color: var(--steel);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.cta-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.cta-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.cta-feature-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(72, 20, 218, 0.06);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.cta-feature span {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  color: var(--graphite);
+}
+.cta-form {
+  background: var(--white-smoke);
+  border-radius: 20px;
+  padding: 2.5rem;
+}
+.cta-form h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--liberty);
+  margin-bottom: 1.5rem;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.form-group { margin-bottom: 1rem; }
+.form-group label {
+  display: block;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--graphite);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.02em;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--chrome);
+  border-radius: 8px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  color: var(--liberty);
+  background: #fff;
+  transition: border-color 0.3s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--purplish-blue);
+  box-shadow: 0 0 0 3px rgba(72, 20, 218, 0.08);
+}
+.form-group textarea { resize: vertical; min-height: 80px; }
+.form-submit {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--purplish-blue);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 0.5rem;
+}
+.form-submit:hover {
+  background: #5a2de8;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(72, 20, 218, 0.3);
+}
+
+/* ═══ FOOTER ═══ */
+footer {
+  background: var(--liberty);
+  padding: 4rem 0 2rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer-brand .nav-logo { margin-bottom: 1rem; }
+.footer-tagline {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+}
+.footer-col h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+}
+.footer-col a {
+  display: block;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  margin-bottom: 0.6rem;
+  transition: color 0.3s;
+}
+.footer-col a:hover { color: var(--electric-lemonade); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.3);
+}
+.footer-legal a {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  margin-left: 1.5rem;
+  transition: color 0.3s;
+}
+.footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 900px) {
+  .hero-metrics { grid-template-columns: repeat(2, 1fr); }
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card.wide { grid-template-columns: 1fr; text-align: center; }
+  .service-card.wide .service-icon { margin: 0 auto 1rem; }
+  .diff-grid { grid-template-columns: 1fr; }
+  .snd-layout,
+  .proof-layout,
+  .cta-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+  .formula-equation { flex-direction: column; gap: 0.8rem; }
+}
+@media (max-width: 600px) {
+  .hero-metrics { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .proof-metrics { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="navbar">
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">Q</div>
+      <span class="nav-logo-text">Quantum 360°</span>
+    </a>
+    <div class="nav-links">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#tecnologia">Tecnología</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#contacto" class="nav-cta">Contáctanos</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span>Sistema Nervioso Digital activo — 65+ ubicaciones conectadas</span>
+      </div>
+      <h1>Mantenimiento<br>Industrial <span class="accent">Inteligente</span></h1>
+      <p class="hero-sub">Tu operación no puede parar. Nosotros garantizamos la disponibilidad de tus equipos con tecnología, técnicos propios y respuesta garantizada.</p>
+      <div class="hero-ctas">
+        <a href="#contacto" class="btn-primary">Solicita una evaluación →</a>
+        <a href="#tecnologia" class="btn-secondary">Conoce nuestra tecnología</a>
+      </div>
+    </div>
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <div class="hero-metric-value">65+</div>
+        <div class="hero-metric-label">Ubicaciones operando</div>
+      </div>
+      <div class="hero-metric">
+        <div class="hero-metric-value">&lt;4 hrs</div>
+        <div class="hero-metric-label">SLA de respuesta</div>
+      </div>
+      <div class="hero-metric">
+        <div class="hero-metric-value">24/7</div>
+        <div class="hero-metric-label">Monitoreo en tiempo real</div>
+      </div>
+      <div class="hero-metric">
+        <div class="hero-metric-value">88%</div>
+        <div class="hero-metric-label">Automatización de procesos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about-strip" id="nosotros">
+  <div class="container">
+    <div class="about-content animate-on-scroll">
+      <span class="section-label">Quiénes somos</span>
+      <h2>De servicio tradicional a plataforma tecnológica de mantenimiento</h2>
+      <p>Q360 nació como empresa de mantenimiento industrial. Hoy somos una plataforma tecnológica que garantiza la operación continua de equipos críticos en retail. Combinamos técnicos especializados con un Sistema Nervioso Digital que monitorea, automatiza y documenta cada intervención — eliminando la incertidumbre operativa.</p>
+      <p>Nuestro equipo de más de 50 técnicos especializados opera diariamente en más de 65 centros de distribución, con tiempos de respuesta garantizados y visibilidad total para nuestros clientes.</p>
+      <a href="#" class="about-cta">Conoce más sobre Q360</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="services" id="servicios">
+  <div class="container">
+    <div class="services-header animate-on-scroll">
+      <span class="section-label">Líneas de servicio</span>
+      <h2>Especialistas en equipos críticos para retail</h2>
+      <p>Cada línea cuenta con técnicos certificados, inventario de refacciones, y monitoreo integrado a nuestro Sistema Nervioso Digital.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon">⚡</div>
+        <h3>Baterías Industriales</h3>
+        <p>Diagnóstico de celdas, cambio de cables y conectores, reparación de cargadores, y migración a tecnología de litio para montacargas y equipos de piso.</p>
+        <div class="service-tag">65+ ubicaciones</div>
+      </div>
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon">🏗️</div>
+        <h3>Montacargas</h3>
+        <p>Servicio integral para montacargas eléctricos y térmicos. Llantas, sistemas hidráulicos, cadenas de elevación, frenos y motores. Disponibilidad garantizada.</p>
+        <div class="service-tag">Respuesta &lt; 4 horas</div>
+      </div>
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon">❄️</div>
+        <h3>HVAC y Refrigeración</h3>
+        <p>Sistemas de aire acondicionado, minisplits y refrigeración comercial. Cambio de compresores, reparación de línea fría/caliente, y mantenimiento preventivo programado.</p>
+        <div class="service-tag">Monitoreo remoto 24/7</div>
+      </div>
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon">🔥</div>
+        <h3>Cocinas Industriales</h3>
+        <p>Reparación de campanas extractoras, limpieza profunda, mantenimiento de equipos de preparación y líneas de servicio para operación retail.</p>
+        <div class="service-tag">Cumplimiento normativo</div>
+      </div>
+      <div class="service-card wide animate-on-scroll">
+        <div class="service-icon">📋</div>
+        <div>
+          <h3>Mantenimiento Preventivo Programado</h3>
+          <p>Planes por equipo y ubicación con calendario automatizado, evidencia fotográfica de cada intervención, y reportes en tiempo real. Reducimos fallas no planeadas y extendemos la vida útil de tus activos.</p>
+        </div>
+        <div class="service-tag">88% tickets automatizados</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIFFERENTIATORS ═══ -->
+<section class="differentiators">
+  <div class="container">
+    <div class="diff-header animate-on-scroll">
+      <span class="section-label">Por qué Q360</span>
+      <h2>¿Por qué las operaciones más exigentes confían en nosotros?</h2>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card animate-on-scroll">
+        <div class="diff-number">01</div>
+        <h3>Respuesta garantizada</h3>
+        <p>SLA contractual de menos de 4 horas. No es una promesa — es un compromiso medible y penalizable. Cada ticket tiene timestamp de inicio y cierre.</p>
+      </div>
+      <div class="diff-card animate-on-scroll">
+        <div class="diff-number">02</div>
+        <h3>Visibilidad total en tiempo real</h3>
+        <p>Dashboards con el estatus de cada equipo, cada técnico, y cada intervención. Sin llamadas para pedir reportes — la información está siempre disponible.</p>
+      </div>
+      <div class="diff-card animate-on-scroll">
+        <div class="diff-number">03</div>
+        <h3>Técnicos propios y especializados</h3>
+        <p>No subcontratamos. Más de 50 técnicos empleados directos, capacitados y certificados en las líneas de equipo que operan.</p>
+      </div>
+      <div class="diff-card animate-on-scroll">
+        <div class="diff-number">04</div>
+        <h3>Todo documentado, todo verificable</h3>
+        <p>Evidencia fotográfica geolocalizada, registro de tiempos, refacciones utilizadas, y firma del responsable. Sin registro, no existe.</p>
+      </div>
+      <div class="diff-card animate-on-scroll">
+        <div class="diff-number">05</div>
+        <h3>Automatización que reduce errores</h3>
+        <p>88% de tickets operativos se procesan sin intervención humana. Desde la detección hasta la asignación del técnico, la tecnología trabaja por ti.</p>
+      </div>
+      <div class="diff-card animate-on-scroll">
+        <div class="diff-number">06</div>
+        <h3>Un solo punto de contacto</h3>
+        <p>Un contrato, un equipo, un dashboard. Eliminamos la coordinación multi-proveedor para que te enfoques en tu operación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SND TECHNOLOGY ═══ -->
+<section class="snd" id="tecnologia">
+  <div class="container">
+    <div class="snd-layout">
+      <div class="snd-content animate-on-scroll">
+        <span class="section-label" style="color: var(--electric-lemonade);">Tecnología</span>
+        <h2>Sistema Nervioso Digital</h2>
+        <p class="snd-tagline">La tecnología que valida la tecnología. Cero auditorías humanas.</p>
+        <p>Nuestro stack tecnológico integra monitoreo de equipos, gestión de tickets, rastreo de técnicos, documentación de evidencia, y reporteo en tiempo real — todo conectado en un ecosistema digital unificado.</p>
+        <div class="snd-stats">
+          <div class="snd-stat">
+            <div class="snd-stat-value">65+</div>
+            <div class="snd-stat-label">Ubicaciones conectadas</div>
+          </div>
+          <div class="snd-stat">
+            <div class="snd-stat-value">88%</div>
+            <div class="snd-stat-label">Tickets automatizados</div>
+          </div>
+          <div class="snd-stat">
+            <div class="snd-stat-value">15 min</div>
+            <div class="snd-stat-label">Refresh de dashboards</div>
+          </div>
+          <div class="snd-stat">
+            <div class="snd-stat-value">100%</div>
+            <div class="snd-stat-label">Evidencia fotográfica</div>
+          </div>
+        </div>
+      </div>
+      <div class="snd-visual animate-on-scroll">
+        <div class="snd-node">
+          <div class="snd-node-icon monday">📊</div>
+          <div class="snd-node-text">
+            <div class="snd-node-name">Monday.com</div>
+            <div class="snd-node-desc">Gestión de tickets y proyectos</div>
+          </div>
+          <div class="snd-node-status">Activo</div>
+        </div>
+        <div class="snd-node">
+          <div class="snd-node-icon netsuite">💰</div>
+          <div class="snd-node-text">
+            <div class="snd-node-name">NetSuite</div>
+            <div class="snd-node-desc">ERP y facturación</div>
+          </div>
+          <div class="snd-node-status">Activo</div>
+        </div>
+        <div class="snd-node">
+          <div class="snd-node-icon samsara">📍</div>
+          <div class="snd-node-text">
+            <div class="snd-node-name">Samsara</div>
+            <div class="snd-node-desc">Rastreo de flotilla y técnicos</div>
+          </div>
+          <div class="snd-node-status">Activo</div>
+        </div>
+        <div class="snd-node">
+          <div class="snd-node-icon datascope">📱</div>
+          <div class="snd-node-text">
+            <div class="snd-node-name">DataScope</div>
+            <div class="snd-node-desc">Evidencia fotográfica en campo</div>
+          </div>
+          <div class="snd-node-status">Activo</div>
+        </div>
+        <div class="snd-node">
+          <div class="snd-node-icon n8n">⚙️</div>
+          <div class="snd-node-text">
+            <div class="snd-node-name">n8n</div>
+            <div class="snd-node-desc">Automatización de workflows</div>
+          </div>
+          <div class="snd-node-status">Activo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SOCIAL PROOF ═══ -->
+<section class="social-proof" id="clientes">
+  <div class="container">
+    <div class="proof-layout">
+      <div class="proof-content animate-on-scroll">
+        <span class="section-label">Caso de éxito</span>
+        <h2>La operación retail más grande de México confía en Q360</h2>
+        <p>Operamos el mantenimiento de equipos críticos en más de 65 ubicaciones del retailer #1 de México — incluyendo 13 centros de distribución y tiendas en múltiples ciudades del país. Baterías industriales, montacargas, HVAC y cocinas — con cobertura nacional, respuesta garantizada, y visibilidad total.</p>
+        <div class="proof-metrics">
+          <div class="proof-metric">
+            <div class="proof-metric-value">65+</div>
+            <div class="proof-metric-label">Ubicaciones operando</div>
+          </div>
+          <div class="proof-metric">
+            <div class="proof-metric-value">13</div>
+            <div class="proof-metric-label">Centros de distribución</div>
+          </div>
+          <div class="proof-metric">
+            <div class="proof-metric-value">51</div>
+            <div class="proof-metric-label">Técnicos dedicados</div>
+          </div>
+          <div class="proof-metric">
+            <div class="proof-metric-value">+3 años</div>
+            <div class="proof-metric-label">Operación continua</div>
+          </div>
+        </div>
+      </div>
+      <div class="proof-visual animate-on-scroll">
+        <div class="proof-card">
+          <div class="proof-card-label">Filosofía Q360</div>
+          <div class="proof-card-quote">"Nuestros clientes no compran servicios de mantenimiento. Compran uptime, visibilidad y predictibilidad."</div>
+          <div class="proof-card-attr">— Principio operativo Q360</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALUE FORMULA ═══ -->
+<section class="formula">
+  <div class="container">
+    <div class="formula-box animate-on-scroll">
+      <div class="formula-equation">
+        <div class="formula-term">Automatización</div>
+        <div class="formula-op">+</div>
+        <div class="formula-term">Visibilidad</div>
+        <div class="formula-op">=</div>
+        <div class="formula-result">Premium justificado</div>
+      </div>
+      <p class="formula-text">Nuestros clientes no pagan por horas de servicio. Pagan por uptime garantizado, visibilidad en tiempo real, y la predictibilidad de saber que su operación está cubierta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq">
+  <div class="container">
+    <div class="faq-header animate-on-scroll">
+      <span class="section-label">Preguntas frecuentes</span>
+      <h2>¿Tienes dudas? Aquí las resolvemos</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">
+          ¿Qué tipo de equipos dan mantenimiento?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Nos especializamos en equipos críticos para operación retail e industrial: baterías industriales para montacargas, montacargas eléctricos y térmicos, sistemas HVAC y refrigeración, y cocinas industriales. También ofrecemos mantenimiento preventivo programado para todos estos equipos.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          ¿En qué zonas tienen cobertura?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Operamos a nivel nacional en México, con presencia en más de 65 ubicaciones incluyendo 13 centros de distribución y tiendas en múltiples ciudades. Nuestros técnicos están distribuidos estratégicamente para garantizar tiempos de respuesta menores a 4 horas.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          ¿Qué es el Sistema Nervioso Digital (SND)?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Es nuestra plataforma tecnológica integrada que conecta monitoreo de equipos, gestión de tickets, rastreo de técnicos, y reporteo en tiempo real. Permite que el 88% de los tickets operativos se procesen de forma automatizada, y que nuestros clientes tengan visibilidad total de su operación.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          ¿Cuál es su tiempo de respuesta?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Nuestro SLA estándar es de menos de 4 horas desde la detección del problema hasta la llegada del técnico. Este compromiso es contractual y medible — cada ticket tiene registro de timestamps.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          ¿Cómo se diferencia Q360 de otros proveedores?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Tres cosas nos distinguen: todos nuestros técnicos son empleados directos (no subcontratamos); nuestra tecnología ofrece visibilidad en tiempo real que otros proveedores no tienen; y cada intervención se documenta con evidencia fotográfica, tiempos, y firma del responsable.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          ¿Puedo ver el estatus de mis equipos en tiempo real?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Sí. Nuestro Sistema Nervioso Digital ofrece dashboards actualizados donde puedes ver el estatus de cada equipo, cada ticket abierto, y cada intervención completada. Estamos desarrollando un portal dedicado para clientes que estará disponible este año.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA + FORM ═══ -->
+<section class="cta-section" id="contacto">
+  <div class="container">
+    <div class="cta-layout">
+      <div class="cta-text animate-on-scroll">
+        <span class="section-label">Contacto</span>
+        <h2>¿Listo para una operación que no se detiene?</h2>
+        <p>Cuéntanos sobre tu operación y te mostramos cómo Q360 puede garantizar la disponibilidad de tus equipos.</p>
+        <div class="cta-features">
+          <div class="cta-feature">
+            <div class="cta-feature-icon">📞</div>
+            <span>+52 56 11 15 84 21</span>
+          </div>
+          <div class="cta-feature">
+            <div class="cta-feature-icon">✉️</div>
+            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c2cecfd5c0c2d5cee1d0d4c0cfd5d4cc9297918fcdd5c5">[email&#160;protected]</a></span>
+          </div>
+          <div class="cta-feature">
+            <div class="cta-feature-icon">📍</div>
+            <span>Ciudad de México, México</span>
+          </div>
+        </div>
+      </div>
+      <div class="cta-form animate-on-scroll">
+        <h3>Solicita una evaluación</h3>
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre completo *</label>
+              <input type="text" placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+              <label>Empresa *</label>
+              <input type="text" placeholder="Nombre de tu empresa">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email corporativo *</label>
+              <input type="email" placeholder="email@empresa.com">
+            </div>
+            <div class="form-group">
+              <label>Teléfono *</label>
+              <input type="tel" placeholder="+52">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Industria</label>
+              <select>
+                <option value="">Selecciona</option>
+                <option>Retail</option>
+                <option>Logística</option>
+                <option>Manufactura</option>
+                <option>Otra</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Número de ubicaciones</label>
+              <select>
+                <option value="">Selecciona</option>
+                <option>1-5</option>
+                <option>6-20</option>
+                <option>21-50</option>
+                <option>50+</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>¿Qué equipos necesitan servicio?</label>
+            <select>
+              <option value="">Selecciona</option>
+              <option>Baterías industriales</option>
+              <option>Montacargas</option>
+              <option>HVAC / Refrigeración</option>
+              <option>Cocinas industriales</option>
+              <option>Varios / Todos</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Información adicional</label>
+            <textarea placeholder="Cuéntanos más sobre tu operación y necesidades..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Solicitar evaluación →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <div class="nav-logo-icon">Q</div>
+          <span class="nav-logo-text">Quantum 360°</span>
+        </a>
+        <p class="footer-tagline">Mantenimiento Industrial Inteligente.<br>Garantizamos la disponibilidad de tus equipos con tecnología, técnicos propios y respuesta garantizada.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <a href="#">Nosotros</a>
+        <a href="#">Servicios</a>
+        <a href="#">Tecnología</a>
+        <a href="#">Clientes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <a href="#">Baterías industriales</a>
+        <a href="#">Montacargas</a>
+        <a href="#">HVAC</a>
+        <a href="#">Cocinas</a>
+        <a href="#">Preventivo</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="tel:+525611158421">+52 56 11 15 84 21</a>
+        <a href="/cdn-cgi/l/email-protection#e78488899386849388a79692868993928ad4d1d7c98b9383"><span class="__cf_email__" data-cfemail="1a7975746e7b796e755a6b6f7b746e6f77292c2a34766e7e">[email&#160;protected]</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Quantum 360° — Todos los derechos reservados</span>
+      <div class="footer-legal">
+        <a href="#">Aviso de Privacidad</a>
+        <a href="#">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isActive = item.classList.contains('active');
+    
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('active');
+      i.querySelector('.faq-answer').style.maxHeight = null;
+    });
+    
+    // Open clicked if it wasn't active
+    if (!isActive) {
+      item.classList.add('active');
+      answer.style.maxHeight = answer.scrollHeig
